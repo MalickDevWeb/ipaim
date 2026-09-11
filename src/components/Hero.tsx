@@ -39,7 +39,21 @@ export const Hero: React.FC<HeroProps> = ({
       if (playPromise !== undefined) {
         playPromise.catch((error) => {
           console.warn("Autoplay avec son bloqué par le navigateur:", error);
-          // La vidéo restera en pause jusqu'à ce que l'utilisateur interagisse.
+          
+          // Si bloqué, on écoute la PREMIÈRE interaction de l'utilisateur sur la page
+          const playOnInteract = () => {
+            if (videoRef.current && videoRef.current.paused) {
+              videoRef.current.play().catch(() => {});
+            }
+            // On nettoie les écouteurs d'événements après le premier déclenchement
+            ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
+              window.removeEventListener(event, playOnInteract);
+            });
+          };
+
+          ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
+            window.addEventListener(event, playOnInteract, { once: true });
+          });
         });
       }
     }

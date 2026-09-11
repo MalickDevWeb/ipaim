@@ -207,7 +207,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
                 <div className="flex items-center gap-3 relative z-10">
                   <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 shadow-inner">
-                    <img src="/logo.png" alt="IPAIM" className="w-full h-full object-contain" />
+                    <img src="/logo-ipaim.svg" alt="IPAIM" className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <span className="font-black text-lg block leading-tight">IPAIM THIÈS</span>

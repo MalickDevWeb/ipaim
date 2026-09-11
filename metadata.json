@@ -1,0 +1,7 @@
+{
+  "name": "IPAIM - Institut Privé Africain en Informatique et Management",
+  "description": "Portail officiel et refonte moderne de l'IPAIM Thiès (Sénégal). Formations d'excellence en BTS, Licences LMD, Informatique, Réseaux, Gestion, Finance et Commerce.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

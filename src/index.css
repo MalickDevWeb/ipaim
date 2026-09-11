@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+html {
+  scroll-padding-top: 5rem;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Masquage propre des barres de défilement tout en préservant le scroll tactile et fluide */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch;
+}

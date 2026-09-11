@@ -121,13 +121,33 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({
 
         {/* Programs Grid */}
         {filteredPrograms.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredPrograms.map((prog) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
+            {filteredPrograms.map((prog, idx) => {
               const IconComp = getIconForProgram(prog.title, prog.code);
+              
+              const total = filteredPrograms.length;
+              
+              // Logique pour bureau (lg) : grille de 6 colonnes
+              const remLg = total % 3;
+              const isLastRowLg = remLg !== 0 && idx >= total - remLg;
+              let lgClass = "lg:col-span-2"; // 2/6 = 1/3 par défaut
+              if (isLastRowLg) {
+                if (remLg === 1) lgClass = "lg:col-span-6"; // 1 carte restante = pleine largeur
+                if (remLg === 2) lgClass = "lg:col-span-3"; // 2 cartes restantes = moitié-moitié
+              }
+
+              // Logique pour tablette (md) : grille de 2 colonnes
+              const remMd = total % 2;
+              const isLastRowMd = remMd !== 0 && idx >= total - remMd;
+              let mdClass = "md:col-span-1"; // 1/2 par défaut
+              if (isLastRowMd) {
+                if (remMd === 1) mdClass = "md:col-span-2"; // 1 carte restante = pleine largeur
+              }
+
               return (
                 <div
                   key={prog.id}
-                  className="group bg-white rounded-[24px] border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                  className={`group bg-white rounded-[24px] border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden ${mdClass} ${lgClass}`}
                 >
                   {/* Image Header with exact wave layout */}
                   <div className="relative w-full h-[220px] bg-slate-900 overflow-hidden shrink-0">

@@ -15,6 +15,7 @@ import {
   UserCheck,
   MessageSquare
 } from 'lucide-react';
+import { WhatsAppIcon } from './FloatingWhatsApp';
 
 interface NavbarProps {
   onOpenRegistration: (programId?: string) => void;
@@ -153,13 +154,24 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>S'inscrire</span>
             </motion.button>
 
+            {/* Bouton WhatsApp Mobile (visible sous lg) près du menu */}
+            <a
+              href={`https://wa.me/221775643790?text=${encodeURIComponent("Bonjour IPAIM, j'aimerais avoir plus d'informations sur vos formations.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="lg:hidden p-1.5 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0 flex items-center justify-center"
+              aria-label="Contact WhatsApp"
+            >
+              <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
+            </a>
+
             {/* Bouton Menu Mobile / Tablette (visible sous lg) */}
             <motion.button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               whileTap={{ scale: 0.92 }}
               aria-label="Menu"
-              className="lg:hidden p-1.5 text-slate-700 hover:text-[#0066bf] hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0"
+              className="lg:hidden p-1.5 text-slate-700 hover:text-[#0066bf] hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0 flex items-center justify-center"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.button>

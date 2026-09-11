@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 
-const WhatsAppIcon = ({ className }: { className?: string }) => (
+export const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -17,14 +17,14 @@ export const FloatingWhatsApp: React.FC = () => {
   const defaultMessage = encodeURIComponent("Bonjour IPAIM, j'aimerais avoir plus d'informations sur vos formations.");
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
+    <div className="fixed bottom-6 left-6 z-50 hidden lg:flex flex-col items-start gap-3 pointer-events-none">
       
-      {/* Info-bulle (masquée sur mobile) */}
+      {/* Info-bulle */}
       <motion.div 
-        initial={{ opacity: 0, x: 20 }}
+        initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1.5, duration: 0.5 }}
-        className="hidden sm:flex bg-white text-slate-800 text-xs font-bold px-4 py-2.5 rounded-2xl shadow-xl border border-slate-100 pointer-events-auto"
+        className="bg-white text-slate-800 text-xs font-bold px-4 py-2.5 rounded-2xl shadow-xl border border-slate-100 pointer-events-auto"
       >
         Besoin d'aide ? Discutons ! 💬
       </motion.div>

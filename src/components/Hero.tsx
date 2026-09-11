@@ -33,40 +33,39 @@ export const Hero: React.FC<HeroProps> = ({
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
-    if (videoRef.current) {
-      videoRef.current.volume = 1;
-      
-      const tryPlay = () => {
-        if (!videoRef.current) return;
-        const playPromise = videoRef.current.play();
-        if (playPromise !== undefined) {
-          playPromise.catch((error) => {
-            console.warn("Autoplay avec son bloqué par le navigateur:", error);
-            
-            // Si bloqué, on écoute la PREMIÈRE interaction de l'utilisateur sur la page
-            const playOnInteract = () => {
-              if (videoRef.current && videoRef.current.paused) {
-                videoRef.current.play().catch(() => {});
-              }
-              // On nettoie les écouteurs d'événements après le premier déclenchement
-              ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
-                window.removeEventListener(event, playOnInteract);
-              });
-            };
-
-            ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
-              window.addEventListener(event, playOnInteract, { once: true });
-            });
-          });
+    // Fonction déclenchée à la PREMIÈRE interaction de l'utilisateur
+    const playWithSoundOnInteract = () => {
+      setIsMuted(false); // On active le son
+      if (videoRef.current) {
+        videoRef.current.volume = 1;
+        if (videoRef.current.paused) {
+          videoRef.current.play().catch(() => {});
         }
-      };
+      }
+      // On retire les écouteurs une fois l'interaction détectée
+      ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
+        window.removeEventListener(event, playWithSoundOnInteract);
+      });
+    };
 
-      // Attendre 3 secondes sur la photo de couverture avant de lancer
-      timeoutId = setTimeout(tryPlay, 3000);
-    }
+    // On écoute la première interaction sur toute la page
+    ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
+      window.addEventListener(event, playWithSoundOnInteract, { once: true });
+    });
+
+    // Si l'utilisateur ne fait rien, on lance la vidéo en muet après 3 secondes
+    timeoutId = setTimeout(() => {
+      if (videoRef.current && videoRef.current.paused) {
+        // La vidéo est muette par défaut, donc l'autoplay passera
+        videoRef.current.play().catch(() => {});
+      }
+    }, 3000);
 
     return () => {
       clearTimeout(timeoutId);
+      ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
+        window.removeEventListener(event, playWithSoundOnInteract);
+      });
     };
   }, []);
 

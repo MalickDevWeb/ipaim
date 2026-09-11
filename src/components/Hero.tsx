@@ -314,7 +314,7 @@ export const Hero: React.FC<HeroProps> = ({
                 onClick={scrollToPresentation}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="absolute top-1/2 -right-2 sm:-right-6 transform -translate-y-1/2 z-20 flex items-center gap-2 bg-[#003884] hover:bg-[#002b66] pl-1 pr-4 py-1.5 rounded-full shadow-2xl border-2 border-white text-white cursor-pointer transition-colors group select-none"
+                className="absolute top-6 -left-2 sm:-left-6 z-20 flex items-center gap-2 bg-[#003884] hover:bg-[#002b66] pl-1 pr-4 py-1.5 rounded-full shadow-2xl border-2 border-white text-white cursor-pointer transition-colors group select-none"
               >
                 {/* Cercle noir avec liseré doré et flèche lecture jaune */}
                 <div className="w-10 h-10 rounded-full bg-slate-950 border-2 border-[#ebe727] flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 transition-transform">
@@ -329,10 +329,10 @@ export const Hero: React.FC<HeroProps> = ({
 
               {/* Carte Flottante Lauréats & Majors Nationaux avec Drapeau du Sénégal */}
               <motion.div
-                initial={{ y: 15, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
+                initial={{ y: 15, opacity: 0, x: "-50%" }}
+                animate={{ y: 0, opacity: 1, x: "-50%" }}
                 transition={{ duration: 0.7, delay: 0.4 }}
-                className="absolute -bottom-3 sm:-bottom-5 right-2 sm:right-4 z-20 bg-white rounded-2xl p-3 sm:p-4 shadow-2xl border border-slate-100 flex items-center gap-3 select-none"
+                className="absolute -bottom-6 left-1/2 z-20 w-max max-w-[95%] bg-white rounded-2xl p-3 sm:p-4 shadow-2xl border border-slate-100 flex items-center gap-3 select-none"
               >
                 {/* Couronne de laurier dorée avec trophée */}
                 <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center justify-center shrink-0 text-[#eab308]">

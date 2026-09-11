@@ -13,7 +13,11 @@ import {
   ArrowRight,
   Calculator,
   UserCheck,
-  MessageSquare
+  MessageSquare,
+  GraduationCap,
+  Trophy,
+  PlaySquare,
+  MapPin
 } from 'lucide-react';
 import { WhatsAppIcon } from './FloatingWhatsApp';
 
@@ -38,7 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-[100]">
       <nav 
         className="bg-white border-b border-slate-200/80 shadow-xs py-2.5 sm:py-3"
       >
@@ -198,27 +202,51 @@ export const Navbar: React.FC<NavbarProps> = ({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="lg:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-white z-[70] shadow-2xl flex flex-col"
+              className="lg:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-slate-50 z-[110] shadow-2xl flex flex-col"
             >
               {/* Drawer Header */}
-              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-slate-100">
-                <span className="font-black text-slate-800 text-lg">Menu</span>
+              <div className="flex items-center justify-between p-5 sm:p-6 bg-gradient-to-r from-[#0b1a3d] to-[#1a1a8c] text-white shadow-md relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                <div className="flex items-center gap-3 relative z-10">
+                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 shadow-inner">
+                    <img src="/logo.png" alt="IPAIM" className="w-full h-full object-contain" />
+                  </div>
+                  <div>
+                    <span className="font-black text-lg block leading-tight">IPAIM THIÈS</span>
+                    <span className="text-[10px] text-blue-200 font-medium uppercase tracking-wider">Institut d'Excellence</span>
+                  </div>
+                </div>
                 <button 
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
+                  className="relative z-10 p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-6 h-6" />
                 </button>
               </div>
 
               {/* Drawer Content */}
-              <div className="flex-1 overflow-y-auto p-4 sm:p-6 flex flex-col gap-6">
-                <div className="flex flex-col space-y-1 font-bold text-slate-700 text-[15px]">
-                  <a href="#formations" onClick={(e) => scrollTo(e, 'formations')} className="px-4 py-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-colors">Formations (BTS & Licences)</a>
-                  <a href="#resultats" onClick={(e) => scrollTo(e, 'resultats')} className="px-4 py-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-colors">Nos Résultats & Majors</a>
-                  <a href="#presentation" onClick={(e) => scrollTo(e, 'presentation')} className="px-4 py-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-colors">Vidéo & Campus Thiès</a>
-                  <button onClick={() => { setMobileMenuOpen(false); onOpenCalculator(); }} className="px-4 py-3 text-left rounded-xl hover:bg-slate-50 active:bg-slate-100 text-slate-700 flex items-center gap-3 transition-colors cursor-pointer"><Calculator className="w-5 h-5 text-[#0066bf]" />Frais de scolarité</button>
-                  <a href="#contact" onClick={(e) => scrollTo(e, 'contact')} className="px-4 py-3 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-colors">Contact & Accès</a>
+              <div className="flex-1 overflow-y-auto p-4 sm:p-5 flex flex-col gap-2">
+                <div className="flex flex-col space-y-2 font-bold text-slate-700 text-[15px]">
+                  <a href="#formations" onClick={(e) => scrollTo(e, 'formations')} className="px-4 py-3.5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-[#0066bf]/30 hover:shadow-md hover:text-[#0066bf] active:scale-[0.98] flex items-center gap-4 transition-all">
+                    <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-[#0066bf]"><GraduationCap className="w-4 h-4" /></div>
+                    Formations (BTS & Licences)
+                  </a>
+                  <a href="#resultats" onClick={(e) => scrollTo(e, 'resultats')} className="px-4 py-3.5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-[#0066bf]/30 hover:shadow-md hover:text-[#0066bf] active:scale-[0.98] flex items-center gap-4 transition-all">
+                    <div className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-500"><Trophy className="w-4 h-4" /></div>
+                    Nos Résultats & Majors
+                  </a>
+                  <a href="#presentation" onClick={(e) => scrollTo(e, 'presentation')} className="px-4 py-3.5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-[#0066bf]/30 hover:shadow-md hover:text-[#0066bf] active:scale-[0.98] flex items-center gap-4 transition-all">
+                    <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500"><PlaySquare className="w-4 h-4" /></div>
+                    Vidéo & Campus Thiès
+                  </a>
+                  <button onClick={() => { setMobileMenuOpen(false); onOpenCalculator(); }} className="px-4 py-3.5 bg-white text-left rounded-2xl shadow-sm border border-slate-100 hover:border-[#0066bf]/30 hover:shadow-md hover:text-[#0066bf] active:scale-[0.98] text-slate-700 flex items-center gap-4 transition-all cursor-pointer">
+                    <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-500"><Calculator className="w-4 h-4" /></div>
+                    Frais de scolarité
+                  </button>
+                  <a href="#contact" onClick={(e) => scrollTo(e, 'contact')} className="px-4 py-3.5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-[#0066bf]/30 hover:shadow-md hover:text-[#0066bf] active:scale-[0.98] flex items-center gap-4 transition-all">
+                    <div className="w-8 h-8 rounded-full bg-rose-50 flex items-center justify-center text-rose-500"><MapPin className="w-4 h-4" /></div>
+                    Contact & Accès
+                  </a>
                 </div>
               </div>
 

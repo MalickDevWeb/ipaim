@@ -10,7 +10,10 @@ import {
   Phone, 
   Menu, 
   X, 
-  ArrowRight
+  ArrowRight,
+  Calculator,
+  UserCheck,
+  MessageSquare
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -142,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-              className="px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-black text-slate-950 bg-[#ebe727] hover:bg-[#deda1b] border border-[#d6d21f] rounded-full shadow-xs transition-colors inline-flex items-center gap-2 cursor-pointer whitespace-nowrap shrink-0"
+              className="px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-black text-slate-950 bg-[#ebe727] hover:bg-[#deda1b] border border-[#d6d21f] rounded-full shadow-xs transition-colors hidden sm:inline-flex items-center gap-2 cursor-pointer whitespace-nowrap shrink-0"
             >
               <div className="w-5 h-5 rounded-full bg-slate-950 text-white flex items-center justify-center shrink-0">
                 <ArrowRight className="w-3 h-3 text-white" />

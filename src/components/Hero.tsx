@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { 
   GraduationCap, 
@@ -13,7 +13,8 @@ import {
   Sparkles,
   Trophy,
   Volume2,
-  VolumeX
+  VolumeX,
+  Maximize
 } from 'lucide-react';
 import { AnimatedCampusStats } from './AnimatedCampusStats';
 
@@ -26,13 +27,40 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenRegistration,
   onOpenCalculator
 }) => {
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = 1;
+      // Les navigateurs modernes bloquent l'autoplay avec son.
+      // On tente quand même de le lancer avec le son.
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.warn("Autoplay avec son bloqué par le navigateur:", error);
+          // On ne passe plus en muet, la vidéo restera en pause jusqu'à ce que l'utilisateur interagisse.
+        });
+      }
+    }
+  }, []);
 
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !isMuted;
       setIsMuted(!isMuted);
+    }
+  };
+
+  const toggleFullScreen = () => {
+    if (videoRef.current) {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      } else if ((videoRef.current as any).webkitRequestFullscreen) { /* Safari */
+        (videoRef.current as any).webkitRequestFullscreen();
+      }
     }
   };
 
@@ -129,15 +157,15 @@ export const Hero: React.FC<HeroProps> = ({
               {featureItems.map((feat, idx) => {
                 const Icon = feat.icon;
                 return (
-                  <div key={idx} className="flex flex-col items-start gap-1.5 group">
+                  <div key={idx} className="flex flex-col items-center text-center gap-2 group">
                     <div className="w-10 h-10 rounded-full bg-[#fef08a] border border-[#facc15]/60 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
                       <Icon className="w-5 h-5 text-slate-900" />
                     </div>
-                    <div>
+                    <div className="flex flex-col flex-1">
                       <h4 className="text-xs sm:text-[13px] font-black text-slate-900 leading-tight">
                         {feat.title}
                       </h4>
-                      <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium leading-tight">
+                      <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium leading-tight mt-0.5">
                         {feat.detail}
                       </p>
                     </div>
@@ -237,14 +265,28 @@ export const Hero: React.FC<HeroProps> = ({
                   playsInline
                 />
 
-                {/* Bouton pour activer/désactiver le son */}
-                <button
-                  onClick={toggleMute}
-                  className="absolute bottom-16 sm:bottom-20 right-10 sm:right-16 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-full border border-white/20 shadow-lg flex items-center justify-center text-white transition-all cursor-pointer z-30 sm:opacity-0 sm:group-hover/video:opacity-100 opacity-100"
-                  aria-label={isMuted ? "Activer le son" : "Couper le son"}
-                >
-                  {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 text-[#ebe727]" />}
-                </button>
+                {/* Contrôles Vidéo (Son & Plein Écran) */}
+                <div className="absolute bottom-16 sm:bottom-20 right-10 sm:right-16 flex flex-col gap-2 z-30 sm:opacity-0 sm:group-hover/video:opacity-100 opacity-100 transition-opacity">
+                  
+                  {/* Bouton Plein Écran */}
+                  <button
+                    onClick={toggleFullScreen}
+                    className="w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-full border border-white/20 shadow-lg flex items-center justify-center text-white transition-all cursor-pointer"
+                    aria-label="Mode plein écran"
+                  >
+                    <Maximize className="w-4 h-4" />
+                  </button>
+
+                  {/* Bouton Son */}
+                  <button
+                    onClick={toggleMute}
+                    className="w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-full border border-white/20 shadow-lg flex items-center justify-center text-white transition-all cursor-pointer"
+                    aria-label={isMuted ? "Activer le son" : "Couper le son"}
+                  >
+                    {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 text-[#ebe727]" />}
+                  </button>
+
+                </div>
 
                 {/* Sceau officiel IPAIM incrusté sur le classeur/support */}
                 <div className="absolute bottom-16 sm:bottom-20 left-10 sm:left-16 bg-[#002b66] p-1.5 rounded-full border-2 border-[#ebe727] shadow-lg">

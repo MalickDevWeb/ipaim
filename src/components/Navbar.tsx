@@ -203,7 +203,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="lg:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-slate-50 z-[110] shadow-2xl flex flex-col"
             >
               {/* Drawer Header */}
-              <div className="flex items-center justify-between p-5 sm:p-6 bg-gradient-to-r from-[#0b1a3d] to-[#1a1a8c] text-white shadow-md relative overflow-hidden">
+              <div className="flex items-center justify-between pt-12 pb-5 px-5 sm:pt-14 sm:pb-6 sm:px-6 bg-gradient-to-r from-[#0b1a3d] to-[#1a1a8c] text-white shadow-md relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
                 <div className="flex items-center gap-3 relative z-10">
                   <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 shadow-inner">

@@ -31,32 +31,43 @@ export const Hero: React.FC<HeroProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (videoRef.current) {
       videoRef.current.volume = 1;
-      // Les navigateurs modernes bloquent l'autoplay avec son.
-      // On tente quand même de le lancer avec le son.
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.warn("Autoplay avec son bloqué par le navigateur:", error);
-          
-          // Si bloqué, on écoute la PREMIÈRE interaction de l'utilisateur sur la page
-          const playOnInteract = () => {
-            if (videoRef.current && videoRef.current.paused) {
-              videoRef.current.play().catch(() => {});
-            }
-            // On nettoie les écouteurs d'événements après le premier déclenchement
-            ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
-              window.removeEventListener(event, playOnInteract);
-            });
-          };
+      
+      const tryPlay = () => {
+        if (!videoRef.current) return;
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.warn("Autoplay avec son bloqué par le navigateur:", error);
+            
+            // Si bloqué, on écoute la PREMIÈRE interaction de l'utilisateur sur la page
+            const playOnInteract = () => {
+              if (videoRef.current && videoRef.current.paused) {
+                videoRef.current.play().catch(() => {});
+              }
+              // On nettoie les écouteurs d'événements après le premier déclenchement
+              ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
+                window.removeEventListener(event, playOnInteract);
+              });
+            };
 
-          ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
-            window.addEventListener(event, playOnInteract, { once: true });
+            ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
+              window.addEventListener(event, playOnInteract, { once: true });
+            });
           });
-        });
-      }
+        }
+      };
+
+      // Attendre 3 secondes sur la photo de couverture avant de lancer
+      timeoutId = setTimeout(tryPlay, 3000);
     }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   const toggleMute = () => {
@@ -279,7 +290,6 @@ export const Hero: React.FC<HeroProps> = ({
                       videoRef.current.play();
                     }
                   }}
-                  autoPlay
                   loop
                   muted={isMuted}
                   playsInline

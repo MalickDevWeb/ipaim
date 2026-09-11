@@ -71,18 +71,23 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4"
+      className="fixed inset-0 z-50 overflow-y-auto bg-[#0b1a3d]/40 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4"
     >
       <motion.div 
         initial={{ opacity: 0, scale: 0.94, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.94, y: 16 }}
         transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-        className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200"
+        className="relative w-full max-w-lg bg-white rounded-[32px] shadow-2xl overflow-hidden border border-white/20"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header aux couleurs de l'école : Bleu #1a1a8c et Jaune #ebe727 */}
-        <div className="bg-[#1a1a8c] text-white p-5 sm:p-6 relative border-b-2 border-[#ebe727]">
+        {/* Header aux couleurs de l'école */}
+        <div className="bg-[#0b1a3d] text-white p-6 sm:p-8 relative border-b-2 border-[#ebe727] overflow-hidden">
+          {/* Formes décoratives en fond */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#0066bf] rounded-full blur-3xl opacity-30 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#ebe727] rounded-full blur-3xl opacity-20 translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+          
+          <div className="relative z-10">
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={onClose}
@@ -115,6 +120,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 IPAIM Thiès • Remplissez ce formulaire en 1 minute pour réserver votre place.
               </p>
             </div>
+          </div>
           </div>
         </div>
 

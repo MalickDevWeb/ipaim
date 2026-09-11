@@ -14,8 +14,6 @@ import {
   Calculator,
   UserCheck,
   MessageSquare,
-  GraduationCap,
-  Trophy,
   PlaySquare,
   MapPin
 } from 'lucide-react';

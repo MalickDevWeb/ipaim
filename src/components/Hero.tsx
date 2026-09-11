@@ -110,8 +110,8 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Section Principale : Texte à gauche + Composition Visuelle à droite */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           
-          {/* Colonne Gauche : Titres, Atouts & Boutons d'Action */}
-          <div className="lg:col-span-6 xl:col-span-6 space-y-6">
+          {/* Colonne Gauche : Titres, Atouts & Boutons d'Action (En 2ème sur mobile, 1er sur desktop) */}
+          <div className="order-2 lg:order-1 lg:col-span-6 xl:col-span-6 space-y-6">
             
             {/* Badge Jaune arrondi conforme à la maquette */}
             <motion.div 
@@ -221,9 +221,9 @@ export const Hero: React.FC<HeroProps> = ({
 
           </div>
 
-          {/* Colonne Droite : Composition Graphique (Étudiants, Splash Jaune, Écriture Manuscrite & Badges) */}
-          <div className="lg:col-span-6 xl:col-span-6 relative mt-6 lg:mt-0">
-            <div className="relative w-full max-w-lg mx-auto lg:max-w-none h-[420px] sm:h-[480px] md:h-[520px] flex items-center justify-center">
+          {/* Colonne Droite : Composition Graphique Vidéo (En 1er sur mobile, 2ème sur desktop) */}
+          <div className="order-1 lg:order-2 lg:col-span-6 xl:col-span-6 relative mt-4 lg:mt-0 mb-6 lg:mb-0">
+            <div className="relative w-full max-w-lg mx-auto lg:max-w-none h-[320px] sm:h-[400px] md:h-[480px] lg:h-[520px] flex items-center justify-center">
               
               {/* Grand coup de pinceau dynamique jaune en arrière-plan */}
               <div 

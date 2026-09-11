@@ -114,7 +114,7 @@ export const FloatingAI: React.FC = () => {
   return (
     <>
       {/* Floating Button */}
-      <div className="fixed bottom-24 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
+      <div className="fixed bottom-24 lg:bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
         
         <motion.div 
           initial={{ opacity: 0, x: 20, filter: "blur(8px)" }}

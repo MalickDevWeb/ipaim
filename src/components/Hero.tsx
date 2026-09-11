@@ -258,7 +258,13 @@ export const Hero: React.FC<HeroProps> = ({
                 <video
                   ref={videoRef}
                   src="/presentation-video.mp4"
-                  className="h-[88%] sm:h-[92%] w-full object-cover object-center drop-shadow-2xl rounded-2xl"
+                  poster="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80"
+                  className="h-[88%] sm:h-[92%] w-full object-cover object-center drop-shadow-2xl rounded-2xl cursor-pointer"
+                  onClick={() => {
+                    if (videoRef.current?.paused) {
+                      videoRef.current.play();
+                    }
+                  }}
                   autoPlay
                   loop
                   muted={isMuted}

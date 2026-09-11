@@ -27,16 +27,19 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenRegistration,
   onOpenCalculator
 }) => {
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (videoRef.current) {
-      // Pour que l'autoplay fonctionne à tous les coups au lancement, il DOIT être en muet.
+      videoRef.current.volume = 1;
+      // Les navigateurs modernes bloquent l'autoplay avec son.
+      // On tente quand même de le lancer avec le son.
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch((error) => {
-          console.warn("Autoplay bloqué par le navigateur:", error);
+          console.warn("Autoplay avec son bloqué par le navigateur:", error);
+          // La vidéo restera en pause jusqu'à ce que l'utilisateur interagisse.
         });
       }
     }

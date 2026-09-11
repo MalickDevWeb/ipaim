@@ -159,10 +159,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               href={`https://wa.me/221775643790?text=${encodeURIComponent("Bonjour IPAIM, j'aimerais avoir plus d'informations sur vos formations.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="lg:hidden p-1.5 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0 flex items-center justify-center"
+              className="lg:hidden p-1 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0 flex items-center justify-center"
               aria-label="Contact WhatsApp"
             >
-              <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
+              <WhatsAppIcon className="w-[26px] h-[26px] text-[#25D366]" />
             </a>
 
             {/* Bouton Menu Mobile / Tablette (visible sous lg) */}

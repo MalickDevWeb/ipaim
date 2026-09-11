@@ -167,7 +167,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 >
                   {PROGRAMS.map((prog) => (
                     <option key={prog.id} value={prog.id}>
-                      [{prog.degree}] {prog.title}
+                      {prog.degree} - {prog.title}
                     </option>
                   ))}
                 </select>

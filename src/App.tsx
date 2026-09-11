@@ -18,6 +18,7 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { RegistrationModal } from './components/RegistrationModal';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { FloatingAI } from './components/FloatingAI';
 import { Program } from './types';
 
 export default function App() {
@@ -120,8 +121,9 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Floating WhatsApp Button */}
+      {/* Floating Buttons */}
       <FloatingWhatsApp />
+      <FloatingAI />
     </div>
   );
 }

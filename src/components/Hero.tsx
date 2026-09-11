@@ -27,7 +27,7 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenRegistration,
   onOpenCalculator
 }) => {
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {

@@ -152,12 +152,12 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-3 pt-1"
+              className="flex flex-wrap justify-center lg:justify-start gap-x-4 gap-y-5 pt-2"
             >
               {featureItems.map((feat, idx) => {
                 const Icon = feat.icon;
                 return (
-                  <div key={idx} className="flex flex-col items-center text-center gap-2 group">
+                  <div key={idx} className="flex flex-col items-center text-center gap-2 group w-[45%] sm:w-[30%] xl:w-auto">
                     <div className="w-10 h-10 rounded-full bg-[#fef08a] border border-[#facc15]/60 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
                       <Icon className="w-5 h-5 text-slate-900" />
                     </div>
